@@ -1,16 +1,3 @@
-/*
-type DancingCell = {
-    left: DancingCell;
-    right: DancingCell;
-    up: DancingCell;
-    down: DancingCell;
-    col: DancingCell;
-    row: DancingCell;
-    size: number;
-    id: number;
-}
-*/
-
 function dancingCell() {
     const cell = {}
     cell.left = cell
