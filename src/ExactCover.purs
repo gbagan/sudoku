@@ -2,7 +2,6 @@ module ExactCover where
 
 import Prelude
 import Data.List.Lazy.Types (List, Step(..))
-import Data.List.Lazy as List
 import Data.Lazy (Lazy, defer)
 
 foreign import lazyDlxImpl :: (forall a. (Unit -> a) -> Lazy a) 

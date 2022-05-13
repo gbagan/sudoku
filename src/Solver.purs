@@ -7,9 +7,6 @@ import ExactCover (lazyExactCovers)
 
 type Cell = { row :: Int, col :: Int, value :: Int}
 
-square :: Int -> Int -> Int -> Int
-square squaresize i j = i - i `mod` squaresize + j / squaresize
-
 cellToInt :: Int -> Cell -> Int
 cellToInt size {row, col, value} = row * size * size + col * size + value - 1
 
@@ -41,9 +38,7 @@ solve :: Int -> Array Cell -> List (Array Cell)
 solve squaresize fixedCells = map (intToCell size) <$> lazyExactCovers nbVertices edges fixedVertices
     where
     size = squaresize * squaresize
-    size2 = size * size
-    size3 = size * size * size
     {nbVertices, edges} = generateHypergraph squaresize
-    fixedVertices = cellToInt squaresize <$> fixedCells
+    fixedVertices = cellToInt size <$> fixedCells
     
     

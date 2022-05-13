@@ -37,7 +37,7 @@ data Msg =
     | OpenConsole Int
     -- | ShowSolution (Maybe Solution)
     | Solve
-
+    | ClearSolution
 
 update :: Msg -> Model -> Model
 update msg model = case msg of
@@ -61,3 +61,4 @@ update msg model = case msg of
             case List.head $ solve squaresize fixedCells of
                 Nothing -> model
                 Just solution -> model { cells = addSolution squaresize solution cells }
+    ClearSolution -> model { cells = clearSolution model.cells }
