@@ -6,9 +6,12 @@ import Data.Maybe (Maybe(..))
 import Data.List.Lazy as List
 import Sudoku.Solver (solve)
 
+type ModelCell = { value :: Int, fixed :: Boolean}
+type Solution = Array { row :: Int, col :: Int, value :: Int}
+
 type Model =
     {   squaresize :: Int   
-    ,   cells :: Array { value :: Int, fixed :: Boolean}
+    ,   cells :: Array ModelCell
     ,   isConsoleShowed :: Boolean
     ,   selectedCell :: Maybe Int
     }
@@ -20,6 +23,14 @@ init =
     ,   isConsoleShowed: false
     ,   selectedCell: Nothing
     }
+
+addSolution ::  Int -> Solution -> Array ModelCell -> Array ModelCell
+addSolution squaresize solution =
+    updateAtIndices
+        (solution <#> \{row, col, value} -> (row * squaresize * squaresize + col) /\ {fixed: false, value})
+
+clearSolution :: Array ModelCell -> Array ModelCell
+clearSolution = map \cell -> if cell.fixed then cell else { fixed: false, value: 0 }
 
 data Msg =
       FillCell Int
@@ -49,4 +60,4 @@ update msg model = case msg of
             in
             case List.head $ solve squaresize fixedCells of
                 Nothing -> model
-                Just solution -> model
+                Just solution -> model { cells = addSolution squaresize solution cells }
