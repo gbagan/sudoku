@@ -159,21 +159,9 @@ function* _dlx(dm) {
     }
 }
 
-function* dlx (nbVertices, edges, fixedVertices) {
+export const dlx = nbVertices => edges => fixedVertices => function*() {
     const dm = makeDancingMatrix(nbVertices, edges)
     const res = dmFilter(dm, fixedVertices)
     if (res)
         yield* _dlx(dm)
-}
-
-export const lazyDlxImpl = defer => nil => cons => nbVertices => edges => fixedVertices => {
-    const gen = dlx(nbVertices, edges, fixedVertices)
-    const defered = () => defer(() => {
-        const {value, done} = gen.next()
-        if (done)
-            return nil
-        else
-            return cons(value)(defered())
-    })
-    return defered()
 }
