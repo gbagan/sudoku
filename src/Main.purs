@@ -7,4 +7,4 @@ import Sudoku.Model (init, update)
 import Sudoku.View (view)
 
 main :: Effect Unit
-main = sandbox {init, view, update, selector: "#root"} 
+main = sandbox { init, view, update, selector: "#root" }

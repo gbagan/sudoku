@@ -9,9 +9,9 @@ foreign import data JsGenerator :: Type -> Type
 toLazyList :: forall a. JsGenerator a -> List a
 toLazyList = toLazyListImpl defer Nil Cons
 
-
-foreign import toLazyListImpl :: forall b.
-                            (forall a. (Unit -> a) -> Lazy a) 
-                         -> (forall a. Step a) 
-                         -> (forall a. a -> List a -> Step a)
-                         -> JsGenerator b -> List b
+foreign import toLazyListImpl ::
+  forall b.
+  (forall a. (Unit -> a) -> Lazy a) ->
+  (forall a. Step a) ->
+  (forall a. a -> List a -> Step a) ->
+  JsGenerator b -> List b
