@@ -3,6 +3,7 @@
   [ "arrays"
   , "effect"
   , "integers"
+  , "js-iterators"
   , "lazy"
   , "lists"
   , "maybe"

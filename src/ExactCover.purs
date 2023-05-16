@@ -1,14 +1,10 @@
 module ExactCover where
 
 import Prelude
-import Data.List.Lazy.Types (List, Step(..))
-import Data.List.Lazy as List
-import Data.Lazy (Lazy, defer)
+import Data.List.Lazy (List)
+import JS.Iterable (Iterable, toLazyList)
 
-foreign import lazyDlxImpl :: (forall a. (Unit -> a) -> Lazy a) 
-                         -> (forall a. Step a) 
-                         -> (forall a. a -> List a -> Step a)
-                         -> Int -> Array (Array Int) -> List (Array Int)
+foreign import dlx :: Int -> Array (Array Int) -> Array Int -> Iterable (Array Int)
 
-lazyExactCovers :: Int -> Array (Array Int) -> List (Array Int)
-lazyExactCovers = lazyDlxImpl defer Nil Cons
+lazyExactCovers :: Int -> Array (Array Int) -> Array Int -> List (Array Int)
+lazyExactCovers nbVertices edges fixedVertices = toLazyList $ dlx nbVertices edges fixedVertices
