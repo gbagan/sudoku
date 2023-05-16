@@ -2,9 +2,9 @@
 , dependencies =
   [ "arrays"
   , "effect"
+  , "functions"
   , "integers"
   , "js-iterators"
-  , "lazy"
   , "lists"
   , "maybe"
   , "pha"

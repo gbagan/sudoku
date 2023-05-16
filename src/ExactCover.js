@@ -159,7 +159,7 @@ function* _dlx(dm) {
     }
 }
 
-export const dlx = nbVertices => edges => function*(fixedVertices) {
+export const dlx = function*(nbVertices, edges, fixedVertices) {
     const dm = makeDancingMatrix(nbVertices, edges)
     const res = dmFilter(dm, fixedVertices)
     if (res)
